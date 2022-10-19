@@ -24,31 +24,31 @@ const questions = [
             {
                 type: 'input',
                 message: 'What are your Installation Instructions',
-                name: 'installation-instructions',
+                name: 'installation',
             },
             // usage information
             {
                 type: 'input',
                 message: 'What is your Usage Information',
-                name: 'usage-information',
+                name: 'usage',
+            },
+             // license options -- adds badge
+             {
+                type: 'list',
+                message: 'Choose a license.',
+                name: 'license',
             },
             //contribution guidelines
             {
                 type: 'input',
                 message: 'What are your Contribution Guidelines?',
-                name: 'contribution-guidelines',
+                name: 'contributing',
             },
             // test instructions
             {
                 type: 'input',
                 message: 'What are your test Instructions?',
-                name: 'test-instructions',
-            },
-            // license options -- adds badge
-            {
-                type: 'list',
-                message: 'Choose a license.',
-                name: 'license',
+                name: 'tests',
             },
             // github username
             {
@@ -65,12 +65,53 @@ const questions = [
         ])
 ];
 
+
+const data = `# ${title}
+
+##Table of Contents
+[Description](#description)
+[Installation](#installation)
+[Usage](#usage)
+[License](#license)
+[Contributing](#contributing)
+[Tests](#tests)
+[Questions](#questions)
+
+##Description
+${description}
+
+##Installation
+${installation}
+
+##Usage
+${usage}
+
+##License
+${license}
+
+##Contributing
+${contributing}
+
+##Tests
+${tests}
+
+##Questions
+You can visit my GitHub portfolio using the username provided and contact me via email using the address below.
+GitHub: ${github}
+Email: ${email}`
+
+
+
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+function writeToFile(fileName, data) {
+    fs.writeFile(fileName, data, (err)=>{
+        err ? console.log(err) : console.log('You have successfully created your project README!')
+    })
+}
 
 // TODO: Create a function to initialize app
 function init() {
-    writeToFile()
+    writeToFile('README.md', data)
 }
 
 // Function call to initialize app
